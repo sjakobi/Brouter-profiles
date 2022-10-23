@@ -13,7 +13,7 @@
 ---context:global
 assign   iswet                  0 # 0 as default, *) flag for weather conditions
 assign   turnInstructionMode  = 1 # 0=none, 1=auto-choose, 2=locus-style, 3=osmand-style
-assign   cycleroutes_pref       0.2 # also CRP *)  costfactor penalty for not being cycleroute
+assign   cycleroutes_pref       0.15 # also CRP *)  costfactor penalty for not being cycleroute
 assign   MTB_factor             0.3 # default 0.0, *)
 assign   smallpaved_factor      0.0 # default 0.0, *)
 assign   avoid_unsafe           0 # 0 as default, gives penalty to mainroad without bike friendly status.
