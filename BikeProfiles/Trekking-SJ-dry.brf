@@ -556,6 +556,7 @@ assign initialcost =
               else if and highway=crossing bicycle=no then 60 
               else if and highway=crossing crossing=no then 300 # workaround affecting road routing
               else if ( ford=yes ) then ford_initialcost_node
+              else if ( railway=crossing|level_crossing ) then 300 # https://github.com/poutnikl/Brouter-profiles/issues/28
               else initial_cost_node )
             if bikeaccess then 0  else ( if footaccess then 100 else 1000000 )
 
