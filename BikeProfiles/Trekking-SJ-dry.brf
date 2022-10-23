@@ -16,7 +16,7 @@ assign   turnInstructionMode  = 1 # 0=none, 1=auto-choose, 2=locus-style, 3=osma
 assign   cycleroutes_pref       0.15 # also CRP *)  costfactor penalty for not being cycleroute
 assign   MTB_factor             0.3 # default 0.0, *)
 assign   smallpaved_factor      0.0 # default 0.0, *)
-assign   avoid_unsafe           0 # 0 as default, gives penalty to mainroad without bike friendly status.
+assign   avoid_unsafe           1 # 0 as default, gives penalty to mainroad without bike friendly status.
 assign   hills                  1 # 1=default / 0=BRouter default/ 1=+ penalty for uphills >3.0%/ 2=velomobile-like avoiding slopes, 3= simulates ascend/length time equiv.
                                   # 4=valley mode, 5=No-Flats mode
 assign   isbike_for_mainroads   true # default=true / if false then bike friendly tag hints for mainroads are ignored, keeping their high penalties. v2.5.20
@@ -90,7 +90,7 @@ assign    pass2coefficient 0
 assign   use_proposed_cn        1 # 0 as default, considers proposed cycle networks as unmarked but valid cycleroutes.
 assign   considerTurnRestrictions = true  #v2.5.11
 
-assign   unsafe_penalty_value 1.0 # 1 - was 2 in Trekking, but this may cause U-like safe routes
+assign   unsafe_penalty_value 0.7 # 1 - was 2 in Trekking, but this may cause U-like safe routes
 assign   cost_of_unknown      2.0 # 2 as default, cost of highway=
 
 assign   c_ford_initialcost_node = 500
