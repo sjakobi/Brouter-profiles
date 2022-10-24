@@ -199,6 +199,7 @@ else if ( highway=motorway|motorway_link|trunk|trunk_link ) then 500
 else if ( highway=primary|primary_link )                    then 150
 else if ( highway=secondary|secondary_link )                then 100
 else if ( highway=tertiary|tertiary_link|unclassified )     then 50
+else if ( highway=residential|living_street )               then 20
 else 30
 
 # bend /initialcost                      
