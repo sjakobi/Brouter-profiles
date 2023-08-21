@@ -14,7 +14,7 @@
 assign   iswet                  0 # 0 as default, *) flag for weather conditions
 assign   turnInstructionMode  = 1 # 0=none, 1=auto-choose, 2=locus-style, 3=osmand-style
 assign   cycleroutes_pref       0.15 # also CRP *)  costfactor penalty for not being cycleroute
-assign   MTB_factor             0.3 # default 0.0, *)
+assign   MTB_factor             0.1 # default 0.0, *)
 assign   smallpaved_factor      0.0 # default 0.0, *)
 assign   avoid_unsafe           1 # 0 as default, gives penalty to mainroad without bike friendly status.
 assign   hills                  1 # 1=default / 0=BRouter default/ 1=+ penalty for uphills >3.0%/ 2=velomobile-like avoiding slopes, 3= simulates ascend/length time equiv.
@@ -264,7 +264,7 @@ if smoothness=                                            then 0.0 else
 if smoothness=excellent|very_good|good                    then 0.0 else
 if smoothness=intermediate                                then 0.0 else
 if smoothness=bad|robust_wheels                           then 0.2 else
-if smoothness=very_bad|high_clearance                     then 1.0 else
+if smoothness=very_bad|high_clearance                     then 1.7 else
 if smoothness=horrible|off_road_wheels                    then 2.5 else
 if smoothness=very_horrible                               then 5.0 else
 if smoothness=impassable                                  then 10.0 else
@@ -302,7 +302,7 @@ assign univ_factor_coef
     add ( switch  highway=path -0.25 0.0 )
         switch ( nosurfacenortracktype ) ( switch isbike 0.0 -0.25 )
         switch nosurface  ( switch or isbike tracktype=grade2|grade3 -0.25 -0.5 )
-        switch surface=compacted|fine_gravel -0.25 switch surface=cobblestone|sett  -0.4
+        switch surface=compacted|fine_gravel -0.25 switch surface=cobblestone|sett  -0.5
         switch surface=ground|mud|dirt       -0.6  switch surface=grass|sand        -0.6   
         switch surface=gravel|pebblestone    -0.75   -0.6
 
