@@ -62,7 +62,7 @@ assign good_for_fast_descent
     and ( not bad_smoothness )
         ( not surface_probably_bad_for_fast_descent )
     or surface_probably_good_for_fast_descent
-       highway=primary|secondary|tertiary|unclassified
+       highway=primary|primary_link|secondary|secondary_link|tertiary|unclassified
 
 assign bad_for_fast_descent
   or bad_smoothness
