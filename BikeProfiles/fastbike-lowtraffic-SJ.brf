@@ -33,25 +33,59 @@ assign turnInstructionRoundabouts   = true  # %turnInstructionRoundabouts% | Set
 
 assign   validForBikes        1
 
+---context:way   # following code refers to way-tags
+
+assign ispaved
+  surface=paved|asphalt|concrete|paving_stones|sett|cobblestone
+
+assign isunpaved
+  surface=unpaved|compacted|fine_gravel|gravel|pebblestone|ground|dirt|earth|grass|mud|sand
+
+assign surface_probably_good_for_fast_descent
+  surface=paved|asphalt|concrete|paving_stones
+
+assign surface_probably_bad_for_fast_descent
+  or  isunpaved
+      surface=cobblestone|sett|metal|wood|grass_paver
+
 # the elevation parameters
 
-assign downhillcost switch consider_elevation 80 0
-assign downhillcutoff 0.5
-assign uphillcost 80
-assign uphillcutoff 1.0
+# assign downhillcost switch consider_elevation 80 0
+# assign downhillcutoff 0.5
+# assign uphillcost 80
+# assign uphillcutoff 1.0
 
----context:way   # following code refers to way-tags
+assign bad_smoothness smoothness=bad|very_bad|horrible|very_horrible|impassable
+
+assign good_for_fast_descent
+  and
+    and ( not bad_smoothness )
+        ( not surface_probably_bad_for_fast_descent )
+    or surface_probably_good_for_fast_descent
+       highway=primary|secondary|tertiary|unclassified
+
+assign bad_for_fast_descent
+  or bad_smoothness
+  or and highway=track ( not tracktype=grade1 )
+     isunpaved
+
+assign has_decent_surface surface=asphalt|concrete|paved|paving_stones|fine_gravel|compacted
+assign bad_when_steep ( and highway=track|path not ( or tracktype=grade1 has_decent_surface ) )
+
+assign downhillcost
+  switch good_for_fast_descent 200
+  switch bad_for_fast_descent 200
+  20
+assign downhillcutoff
+  switch good_for_fast_descent 13
+  switch bad_for_fast_descent 5
+  3
+
+assign uphillcost switch bad_when_steep 300 60
+assign uphillcutoff switch bad_when_steep 4 8
 
 assign any_cycleroute or route_bicycle_icn=yes or route_bicycle_ncn=yes or route_bicycle_rcn=yes route_bicycle_lcn=yes
 assign nodeaccessgranted or any_cycleroute lcn=yes
-
-assign ispaved
-  or surface=paved
-  or surface=asphalt
-  or surface=concrete
-    surface=paving_stones
-
-assign isunpaved not or surface= or ispaved or surface=fine_gravel surface=cobblestone
 
 assign turncost = if junction=roundabout then 0
                   else 90
